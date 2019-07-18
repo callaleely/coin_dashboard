@@ -1,11 +1,14 @@
 {
   "name": "coindashboard",
   "version": "1.0.0",
-  "description": "",
+  "description": "visualizes cryptocurrency market data and individual coin data, written in JS & D3.js",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --mode=development --watch"
+    "start": "webpack --watch --mode=development",
+    "server": "node server.js",
+    "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +17,10 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "nedb": "^1.8.0",
+    "nodemon": "^1.19.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "webpack": "^4.36.1",

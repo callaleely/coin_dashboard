@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>React</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="./main.js"></script>
+    </head>
+<body>
+    <img src="" id="raw-data" />
+    <script>
+        const allCoinIds = "AER,BTC,ETH,XRP,LTC,BCH,EOS,XLM,LINK,ETC,ZEC,BAT,USDC,ZRX,REP,DAI,BSV,BNB,USDT,TRX,ADA,XMR,DASH,NEO,MIOTA,ATOM,XEM,XTZ,MKR,ONT,CRO,QTUM,BTG, DOGE,VET,OMG,VSYS,DCR,EGT,HOT,TUSD,BCD,HEDG,RVN,LSK,WAVES,HT,NPXS,KMD,AOA,NANO,QBIT,ICX,BCN,BTS,IOST,DGB,PAX,MONA,QNT,ZIL,KCS,NRG,ABBC,SC";
+        console.log("Fetching Begin")
+        window.fetch(`
+https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${allCoinIds}&tsyms=BTC,USD,EUR&api_key=00ecb1280099a69234affec06b58e1547c88cb16df5fc6956a39d9555248a0b2`)
+            .then(response => response.json())
+            .then(data => window.market = data)
+            // .then(data => window.market = Object.keys(data).map(dt => data[dt]));
+    </script>
+</body>
+</html>
+
