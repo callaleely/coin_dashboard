@@ -1,0 +1,161 @@
+// ]data which need to be fetched
+
+var name = " ";
+
+var value = 840;
+
+var gaugeMaxValue = 1680; 
+
+// donn�es � calculer 
+var percentValue = value / gaugeMaxValue; 
+
+////////////////////////
+
+var needleClient;
+
+
+
+(function(){
+
+var barWidth, chart, chartInset, degToRad, repaintGauge,
+    height, margin, numSections, padRad, percToDeg, percToRad, 
+    percent, radius, sectionIndx, svg, totalPercent, width,
+    valueText, formatValue, k;
+
+  percent = percentValue;
+
+  numSections = 1;
+  sectionPerc = 1 / numSections / 2;
+  padRad = 0.025;
+  chartInset = 10;
+
+  // Orientation of gauge:
+  totalPercent = .75;
+
+  el = d3.select('.chart-gauge');
+
+  margin = {
+    top: 30,
+    right: 30,
+    bottom: 30,
+    left: 30
+  };
+
+  width = el[0][0].offsetWidth - margin.left - margin.right;
+  height = width;
+  radius = Math.min(width, height) / 2;
+  barWidth = 40 * width / 300;
+
+
+
+  //Utility methods 
+
+  percToDeg = function(perc) {
+    return perc * 360;
+  };
+
+  percToRad = function(perc) {
+    return degToRad(percToDeg(perc));
+  };
+
+  degToRad = function(deg) {
+    return deg * Math.PI / 180;
+  };
+
+  // Create SVG element
+  svg = el.append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom);
+
+  // Add layer for the panel
+  chart = svg.append('g').attr('transform', "translate(" + ((width) / 2 + margin.left) + ", " + ((height + margin.top) / 2) + ")");
+
+  chart.append('path').attr('class', "arc chart-red");
+  chart.append('path').attr('class', "arc chart-yellow");
+  chart.append('path').attr('class', "arc chart-green");
+  chart.append('path').attr('class', "arc chart-yellow_");
+  chart.append('path').attr('class', "arc chart-red_");
+
+  valueText = chart.append("chart")
+  formatValue = d3.format('1%');
+
+  arc5 = d3.svg.arc().outerRadius(radius - chartInset).innerRadius(radius - chartInset - barWidth)
+  arc4 = d3.svg.arc().outerRadius(radius - chartInset).innerRadius(radius - chartInset - barWidth)
+  arc3 = d3.svg.arc().outerRadius(radius - chartInset).innerRadius(radius - chartInset - barWidth)
+  arc2 = d3.svg.arc().outerRadius(radius - chartInset).innerRadius(radius - chartInset - barWidth)
+  arc1 = d3.svg.arc().outerRadius(radius - chartInset).innerRadius(radius - chartInset - barWidth)
+
+  repaintGauge = function () 
+  {
+    perc = 0.5;
+    var next_start = totalPercent;
+    arcStartRad = percToRad(next_start);
+    arcEndRad = arcStartRad + percToRad(0.175);
+    next_start += 0.175;
+
+
+    arc1.startAngle(arcStartRad).endAngle(arcEndRad);
+
+    arcStartRad = percToRad(next_start);
+    arcEndRad = arcStartRad + percToRad(0.05);
+    next_start += 0.05;
+
+    arc2.startAngle(arcStartRad + padRad).endAngle(arcEndRad);
+
+    arcStartRad = percToRad(next_start);
+    arcEndRad = arcStartRad + percToRad(0.05);
+    next_start += 0.05;
+
+    arc3.startAngle(arcStartRad + padRad).endAngle(arcEndRad);
+    arcStartRad = percToRad(next_start);
+    arcEndRad = arcStartRad + percToRad(0.05);
+    next_start += 0.05;
+
+    arc4.startAngle(arcStartRad + padRad).endAngle(arcEndRad);
+    arcStartRad = percToRad(next_start);
+    arcEndRad = arcStartRad + percToRad(0.175);
+    next_start += 0.175;
+
+    arc5.startAngle(arcStartRad + padRad).endAngle(arcEndRad);
+
+
+    chart.select(".chart-red").attr('d', arc1);
+    chart.select(".chart-yellow").attr('d', arc2);
+    chart.select(".chart-green").attr('d', arc3);
+    chart.select(".chart-yellow_").attr('d', arc4);
+    chart.select(".chart-red_").attr('d', arc5);
+  }
+/////////
+
+
+    var Needle = (function() {
+
+    //Helper function that returns the `d` value for moving the needle
+    var recalcPointerPos = function(perc) {
+      var centerX, centerY, leftX, leftY, rightX, rightY, thetaRad, topX, topY;
+      thetaRad = percToRad(perc / 2);
+      centerX = 0;
+      centerY = 0;
+      topX = centerX - this.len * Math.cos(thetaRad);
+      topY = centerY - this.len * Math.sin(thetaRad);
+      leftX = centerX - this.radius * Math.cos(thetaRad - Math.PI / 2);
+      leftY = centerY - this.radius * Math.sin(thetaRad - Math.PI / 2);
+      rightX = centerX - this.radius * Math.cos(thetaRad + Math.PI / 2);
+      rightY = centerY - this.radius * Math.sin(thetaRad + Math.PI / 2);
+
+
+        return "M " + leftX + " " + leftY + " L " + topX + " " + topY + " L " + rightX + " " + rightY;
+
+
+
+
+    };
+
+    function Needle(el) {
+      this.el = el;
+      this.len = width / 2.5;
+      this.radius = this.len / 8;
+    }
+
+    Needle.prototype.render = function() {
+      this.el.append('circle').attr('class', 'needle-center').attr('cx', 0).attr('cy', 0).attr('r', this.radius);
+
+
