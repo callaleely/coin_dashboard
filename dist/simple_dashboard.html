@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<head>
+    <script type="text/javascript" src="./gauge.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+</head>
+    <body>
+  
+
 <meta charset="utf-8">
 <style>
 body{
@@ -36,11 +43,10 @@ rect:hover {  fill:blue; }
 }
 
 </style>
-<body>
 <div id='dashboard'>
 </div>
-<script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
+
 function dashboard(id, fData){
     var barColor = 'steelblue';
     function segColor(c){ return {low:"#807dba", mid:"#e08214",high:"#41ab5d"}[c]; }
@@ -253,11 +259,7 @@ var freqData=[
 ,{State:'KS',freq:{low:162, mid:379, high:471}}
 ];
 
-window.fetch('https://min-api.cryptocompare.com/data/top/totalvolfull?limit=10&tsym=USD')
-                .then(response => response.json())
-                .then(data => {console.log(data.Data.map(
-                    datum => datum.RAW.USD
-                ))})
-
 dashboard('#dashboard',freqData);
 </script>
+</body>
+</html>

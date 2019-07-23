@@ -1,71 +1,3 @@
-<html>
-    <head>
-        <title>Market Index</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <script src="./main.js"></script>
-        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-        <script src="./gauge.js"></script>
-        <script src="./pie-linear.js"></script>
-
-        <link rel="stylesheet" type="text/css" href="./stylesheets/market_dashboard.css"/>
-    </head>
-<body>
-    <div class="top_nav">
-    <h1>Market Index</h1>
-    <p id="date"></p>
-        <script>
-        document.getElementById("date").innerHTML=formatDate();
-        function formatDate() {
-        var d = new Date(),
-            minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
-            hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
-            ampm = d.getHours() >= 12 ? 'pm' : 'am',
-            months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-            days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-        return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()+' '+hours+':'+minutes+ampm;
-        }
-        </script>
-    </div>  
-    <div>
-
-        <script>
-            window.fetch('https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD')
-                .then(response => response.json())
-                .then(data => window.toplist = data.Data)
-        </script>
-    </div>
-    <img src="" id="raw-data" />
-    <script>
-        const allCoinIds = "AER,BTC,ETH,XRP,LTC,BCH,EOS,XLM,LINK,ETC,ZEC,BAT,USDC,ZRX,REP,DAI,BSV,BNB,USDT,TRX,ADA,XMR,DASH,NEO,MIOTA,ATOM,XEM,XTZ,MKR,ONT,CRO,QTUM,BTG, DOGE,VET,OMG,VSYS,DCR,EGT,HOT,TUSD,BCD,HEDG,RVN,LSK,WAVES,HT,NPXS,KMD,AOA,NANO,QBIT,ICX,BCN,BTS,IOST,DGB,PAX,MONA,QNT,ZIL,KCS,NRG,ABBC,SC";
-        console.log("Fetching Begin")
-        window.fetch(`
-        https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${allCoinIds}&tsyms=BTC,USD,EUR&api_key=00ecb1280099a69234affec06b58e1547c88cb16df5fc6956a39d9555248a0b2`)
-        .then(response => response.json())
-        .then(data => window.market = data)
-        // .then(data => window.market = Object.keys(data).map(dt => data[dt]));
-        </script>
-    <div id="gauge_container">
-        <div id="gauge_container-box">
-            <div id="power-gauge1">
-                <br/>
-                Index with Bitcoin
-            </div>
-        </div>
-        <div id="gauge_container-box">
-            <div id="power-gauge2">
-                <br/>
-                Index without Bitcoin
-            </div>
-        </div>
-    </div>
-    <div id="graph_container">
-        <h2>Top 5</h2>       
-        <div id='dashboard'>
-            data
-            <script>
-
 function dashboard(id, fData){
     var barColor = 'steelblue';
     function segColor(c){ return {low:"#807dba", mid:"#e08214",high:"#41ab5d"}[c]; }
@@ -277,35 +209,10 @@ var freqData=[
     ,{State:'KS',freq:{low:162, mid:379, high:471}}
     ];
     
-    dashboard('#dashboard',freqData);
-            </script>
-        </div>
-    </div>
-    <br/>
-    <br/>
-    <br/>
-    <table style="width:100%">
-            <tr>
-              <th>Firstname</th>
-              <th>Lastname</th> 
-              <th>Age</th>
-            </tr>
-            <tr>
-              <td>Jill</td>
-              <td>Smith</td>
-              <td>50</td>
-            </tr>
-            <tr>
-              <td>Eve</td>
-              <td>Jackson</td>
-              <td>94</td>
-            </tr>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>80</td>
-            </tr>
-          </table>
-</body>
-</html>
-
+    dashboard('dashboard',freqData);
+    
+    window.fetch('https://min-api.cryptocompare.com/data/top/totalvolfull?limit=10&tsym=USD')
+                    .then(response => response.json())
+                    .then(data => {console.log(data.Data.map(
+                        datum => datum.RAW.USD
+                    ))})

@@ -1,39 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-	<meta name="viewport" content="width=320" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>Gauge</title>
-  
-	<script type="text/javascript" src="http://d3js.org/d3.v2.min.js"></script>
-	<style>
-	body {
-		font-family:  Helvetica, Arial, sans-serif;
-		margin: 32px;
-	}
-
-	#power-gauge g.arc {
-		fill: steelblue;
-	}
-
-	#power-gauge g.pointer {
-		fill: black;
-		stroke: black;
-	}
-	
-	#power-gauge g.label text {
-		text-anchor: middle;
-		font-size: 14px;
-		font-weight: bold;
-		fill: #666;
-	}
-	</style>
-</head>
-<body>
-<div id="power-gauge"></div>
-	
-<script>
 var gauge = function(container, configuration) {
 	var that = {};
 	var config = {
@@ -48,7 +12,7 @@ var gauge = function(container, configuration) {
 		pointerHeadLengthPercent	: 0.9,
 		
 		minValue					: 0,
-		maxValue					: 0.1,
+		maxValue					: 1,
 		
 		minAngle					: -90,
 		maxAngle					: 90,
@@ -56,8 +20,8 @@ var gauge = function(container, configuration) {
 		transitionMs				: 750,
 		
 		majorTicks					: 3,
-		labelFormat					: d3.format('%'),
-		labelInset					: 10,
+		labelFormat					: d3.format(''),
+		labelInset					: 15,
 		
     arcColorFn					: d3.scale.quantize().domain([0,1/3,2/3,1]).range(['red','yellow','green'])
 	};
@@ -195,23 +159,21 @@ var gauge = function(container, configuration) {
 	
 	return that;
 };
-</script>
 
-<script>
-function onDocumentReady() {
-	var powerGauge = gauge('#power-gauge', {
+function onDocumentReady1() {
+	var powerGauge = gauge('#power-gauge1', {
 		size: 300,
 		clipWidth: 300,
 		clipHeight: 300,
 		ringWidth: 60,
-		maxValue: 10,
+		maxValue: 1,
 		transitionMs: 4000,
 	});
 	powerGauge.render();
 	
 	function updateReadings() {
 		// just pump in random data here...
-		powerGauge.update(Math.random() * 10);
+		powerGauge.update(0.5);
 	}
 	
 	// every few seconds update reading values
@@ -221,13 +183,37 @@ function onDocumentReady() {
 	}, 5 * 1000);
 }
 
+function onDocumentReady2() {
+	var powerGauge = gauge('#power-gauge2', {
+		size: 300,
+		clipWidth: 300,
+		clipHeight: 300,
+		ringWidth: 60,
+		maxValue: 1,
+		transitionMs: 4000,
+	});
+	powerGauge.render();
+	
+	function updateReadings() {
+		// just pump in random data here...
+		powerGauge.update(0.2);
+	}
+	
+	// every few seconds update reading values
+	updateReadings();
+	setInterval(function() {
+		updateReadings();
+	}, 5 * 1000);
+}
+
+
 if ( !window.isLoaded ) {
 	window.addEventListener("load", function() {
-		onDocumentReady();
+    onDocumentReady1();
+    onDocumentReady2();
+    
 	}, false);
 } else {
-	onDocumentReady();
+	onDocumentReady1();
+	onDocumentReady2();
 }
-</script>
-</body>
-</html>
