@@ -46,25 +46,38 @@
         .then(data => window.market = data)
         // .then(data => window.market = Object.keys(data).map(dt => data[dt]));
         </script>
-    <div id="gauge_container">
+    <div id="each_container">
         <div id="gauge_container-box">
-            <div id="power-gauge1">
-                <br/>
-                Index with Bitcoin
+            <div id="flex">
+                <h1>Index with Bitcoin
+                    </h1>
+            </div>
+            <div id="flex">
+                <div id="power-gauge1">
+                    <br/>
+                </div>
             </div>
         </div>
         <div id="gauge_container-box">
-            <div id="power-gauge2">
-                <br/>
-                Index without Bitcoin
+            <div id="flex">
+                <h1>Index without Bitcoin
+                    </h1>
+            </div>
+            <div id="flex">
+                <div id="power-gauge2">
+                    <br/>
+                </div>
             </div>
         </div>
     </div>
-    <div id="graph_container">
-        <h2>Top 5</h2>       
+    <div id="each_container">
+        <div id="top_graph_container">
+        <h2>Top 5 Cryptocurrencies (Volume)</h2>       
         <div id='dashboard'>
             data
-            <script>
+
+            <br/>
+<script>
 
 function dashboard(id, fData){
     var barColor = 'steelblue';
@@ -281,9 +294,9 @@ var freqData=[
             </script>
         </div>
     </div>
-    <br/>
-    <br/>
-    <br/>
+    </div>
+
+    <div id="each_container">
     <table style="width:100%">
             <tr>
               <th>Firstname</th>
@@ -306,6 +319,7 @@ var freqData=[
               <td>80</td>
             </tr>
           </table>
+        </div>
 </body>
 </html>
 

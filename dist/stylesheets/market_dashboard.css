@@ -2,19 +2,34 @@
 body {
     font-family:  Helvetica, Arial, sans-serif;
     margin: 32px;
+    background-color: lightgrey;
 }
 
-#gauge_container {
+#each_container {
     display: flex;
-    
+    justify-content: space-around;
+    padding: 2em; 
+    margin: 1em 1em 1em; 
+    background-color: white;
 }
 
 #gauge_container-box {
     border-color: grey;
-    display: flex;
+    display: block;
+    background-color: white; 
+    width: 90%;
+    margin: 0 auto;
 
 }
 
+#guage_container-box h1{
+    display: flex;
+    justify-content: space-around; 
+}
+
+#top_graph_container {
+    display: block; 
+}
 
 #power-gauge g.arc {
     fill: steelblue;
@@ -30,6 +45,21 @@ body {
     font-size: 14px;
     font-weight: bold;
     fill: #666;
+}
+
+#flex {
+    display: flex;
+    justify-content: space-around; 
+}
+
+#graph_container {
+    display: block;
+    height: 410px; 
+    margin: 0 auto;
+    background-color: #fff; 
+    width: 1000px; 
+    padding: 1em; 
+    margin: 1em;
 }
 
 body{
