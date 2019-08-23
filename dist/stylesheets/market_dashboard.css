@@ -2,7 +2,22 @@
 body {
     font-family:  Helvetica, Arial, sans-serif;
     margin: 32px;
-    background-color: lightgrey;
+}
+
+html {
+    background-image: url("blockchain.jpg");
+    height: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    line-height: 1.75em;
+    -webkit-text-stroke: 0.25px;
+}
+
+html.is-scroll {
+    background-attachment: scroll, scroll;
+    background-size: auto, 100% auto; 
 }
 
 #each_container {
@@ -11,6 +26,8 @@ body {
     padding: 2em; 
     margin: 1em 1em 1em; 
     background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 0.5em; 
 }
 
 #gauge_container-box {
