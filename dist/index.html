@@ -45,6 +45,12 @@
         .then(response => response.json())
         .then(data => window.market = data)
         // .then(data => window.market = Object.keys(data).map(dt => data[dt]));
+       
+       console.log("toplist fetching")
+        window.fetch(`https://min-api.cryptocompare.com/data/top/totalvolfull?limit=10&tsym=USD`)
+        .then(response => response.json())
+        .then(data => window.toplist = data.Data);
+        
         </script>
     <div id="each_container">
         <div id="gauge_container-box">
@@ -297,7 +303,7 @@ var freqData=[
     </div>
 
     
-    <div id="each_container">
+    `<div id="each_container">
     <table style="width:100%">
             <tr>
               <th>Name</th>
@@ -308,7 +314,7 @@ var freqData=[
               <th>Change(24h)</th>
             </tr>
             <tr>
-              <td>Jill</td>
+              <td>`hello ${toplist[0].CoinInfo.FullName}`</td>
               <td>Smith</td>
               <td>50</td>
             </tr>
@@ -323,7 +329,7 @@ var freqData=[
               <td>80</td>
             </tr>
           </table>
-        </div>
+        </div>`
 </body>
 </html>
 
