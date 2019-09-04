@@ -50,7 +50,36 @@
         window.fetch(`https://min-api.cryptocompare.com/data/top/totalvolfull?limit=10&tsym=USD`)
         .then(response => response.json())
         .then(data => window.toplist = data.Data);
-        
+
+
+         const table = `
+ <div id="each_container">
+    <table style="width:100%">
+            <tr>
+              <th>Name</th>
+              <th>Market Cap</th> 
+              <th>Price</th>
+              <th>Volume(24h)</th>
+              <th>Circulating Supply</th> 
+              <th>Change(24h)</th>
+            </tr>
+            <tr>
+              <td> hello ${toplist[0].CoinInfo.FullName} </td>
+              <td>Smith</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>Eve</td>
+              <td>Jackson</td>
+              <td>94</td>
+            </tr>
+            <tr>
+              <td>John</td>
+              <td>Doe</td>
+              <td>80</td>
+            </tr>
+          </table>
+        </div>`
         </script>
     <div id="each_container">
         <div id="gauge_container-box">
@@ -84,6 +113,7 @@
 
             <br/>
 <script>
+
 
 function dashboard(id, fData){
     var barColor = 'steelblue';
@@ -301,35 +331,13 @@ var freqData=[
         </div>
     </div>
     </div>
+<div>
+    toplist
+</div>
+ <script>    
 
-    
-    `<div id="each_container">
-    <table style="width:100%">
-            <tr>
-              <th>Name</th>
-              <th>Market Cap</th> 
-              <th>Price</th>
-              <th>Volume(24h)</th>
-              <th>Circulating Supply</th> 
-              <th>Change(24h)</th>
-            </tr>
-            <tr>
-              <td>`hello ${toplist[0].CoinInfo.FullName}`</td>
-              <td>Smith</td>
-              <td>50</td>
-            </tr>
-            <tr>
-              <td>Eve</td>
-              <td>Jackson</td>
-              <td>94</td>
-            </tr>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>80</td>
-            </tr>
-          </table>
-        </div>`
+    document.body.innerHTML = table; 
+</script>
 </body>
 </html>
 
