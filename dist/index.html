@@ -51,35 +51,9 @@
         .then(response => response.json())
         .then(data => window.toplist = data.Data);
 
+        let divs = document.getElementsByClassName("toptable")
+        div.innerText = toplist
 
-         const table = `
- <div id="each_container">
-    <table style="width:100%">
-            <tr>
-              <th>Name</th>
-              <th>Market Cap</th> 
-              <th>Price</th>
-              <th>Volume(24h)</th>
-              <th>Circulating Supply</th> 
-              <th>Change(24h)</th>
-            </tr>
-            <tr>
-              <td> hello ${toplist[0].CoinInfo.FullName} </td>
-              <td>Smith</td>
-              <td>50</td>
-            </tr>
-            <tr>
-              <td>Eve</td>
-              <td>Jackson</td>
-              <td>94</td>
-            </tr>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>80</td>
-            </tr>
-          </table>
-        </div>`
         </script>
     <div id="each_container">
         <div id="gauge_container-box">
@@ -332,12 +306,36 @@ var freqData=[
     </div>
     </div>
 <div>
-    toplist
+    <div id="each_container">
+        <div id="toptable">
+        <table style="width:100%">
+            <tr>
+                <th>Name</th>
+                <th>Market Cap</th>
+                <th>Price</th>
+                <th>Volume(24h)</th>
+                <th>Circulating Supply</th>
+                <th>Change(24h)</th>
+            </tr>
+            <tr>
+                <td> ${toplist[0].CoinInfo.FullName} </td>
+                <td>Smith</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>Eve</td>
+                <td>Jackson</td>
+                <td>94</td>
+            </tr>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>80</td>
+            </tr>
+        </table>
+        </div>
+    </div>
 </div>
- <script>    
-
-    document.body.innerHTML = table; 
-</script>
 </body>
 </html>
 
