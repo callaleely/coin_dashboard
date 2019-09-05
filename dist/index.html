@@ -45,14 +45,14 @@
         .then(response => response.json())
         .then(data => window.market = data)
         // .then(data => window.market = Object.keys(data).map(dt => data[dt]));
-       
+        
+        let topNames = document.getElementById("coin-names");
+
        console.log("toplist fetching")
         window.fetch(`https://min-api.cryptocompare.com/data/top/totalvolfull?limit=10&tsym=USD`)
         .then(response => response.json())
-        .then(data => window.toplist = data.Data);
-
-        let divs = document.getElementsByClassName("toptable")
-        div.innerText = toplist
+        .then(data => {
+        });
 
         </script>
     <div id="each_container">
@@ -317,7 +317,7 @@ var freqData=[
                 <th>Circulating Supply</th>
                 <th>Change(24h)</th>
             </tr>
-            <tr>
+            <tr id="coin-names">
                 <td> ${toplist[0].CoinInfo.FullName} </td>
                 <td>Smith</td>
                 <td>50</td>
